@@ -13,8 +13,10 @@
 
 <script setup lang="ts">
 import Column from "./column.vue";
-import {ref} from "vue";
-import type {DiskColor} from "./disk.vue";
+import { ref } from "vue";
+import { checkWin } from '../logic';
+import type { Columns } from '../logic';
+
 
 interface Props {
   rows: number;
@@ -22,19 +24,34 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const disks = ref<Array<Array<DiskColor>>>(Array.from({ length: props.columns }, () => []));
+const disks = ref<Columns>(Array.from({ length: props.columns }, () => []));
 let nextColor = ref<'red' | 'blue'>('red')
+
+function initGame() {
+  disks.value = Array.from({ length: props.columns }, () => [])
+}
 
 function handleClick(columnIndex: number) {
   if (disks.value[columnIndex].length < props.rows) {
     disks.value[columnIndex].push(nextColor.value);
-    switchColor();
   }
+
+  if (checkWin(disks.value)) {
+    alert(`${nextColor.value} wins!`);
+    initGame()
+  } else if (disks.value.every((column) => column.length === props.rows)) {
+    alert('It\'s a draw!');
+    initGame()
+  }
+
+  switchColor();
 }
 
 function switchColor() {
   nextColor.value = nextColor.value === 'red' ? 'blue' : 'red';
 }
+
+initGame();
 
 </script>
 

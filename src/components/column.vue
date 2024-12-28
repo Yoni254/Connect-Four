@@ -19,8 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import Disk, {type DiskColor} from "./disk.vue";
-import {computed} from "vue";
+import Disk from "./disk.vue";
+import { computed } from "vue";
+import type { DiskColor } from "../logic";
 
 
 interface Props {

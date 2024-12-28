@@ -5,14 +5,12 @@
 </template>
 
 <script setup lang="ts">
-export type DiskColor = 'red' | 'blue' | 'empty';
 interface Props {
   color: 'red' | 'blue' | 'empty'
   hoverColor?: 'red' | 'blue';
 }
 
 const props = defineProps<Props>()
-console.log(props)
 </script>
 
 <style scoped>

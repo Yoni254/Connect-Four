@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "cd dist && git add . && git commit -m 'Deploy' && git push origin g-pages"
   },
   "dependencies": {
+    "@types/lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "vue": "^3.5.13"
   },
   "devDependencies": {
